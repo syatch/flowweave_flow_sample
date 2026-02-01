@@ -1,0 +1,5 @@
+op:
+  test:
+    script: test
+  test2:
+    script: test2

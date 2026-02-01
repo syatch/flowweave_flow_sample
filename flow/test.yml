@@ -1,0 +1,58 @@
+flow:
+  - stage1
+  - stage2
+
+op_source:
+  - test
+  - test.test3
+
+global_option:
+  stage1:
+    global_op:
+      - global 0-0
+      - global 0-1
+  stage2:
+    global_op:
+      - global 1-0
+      - global 1-1
+
+default_option:
+  default_op: 0
+
+stage:
+  stage1:
+    test0:
+      op: test
+      chain:
+        next:
+          - test2
+      option:
+        name: task0
+    test1:
+      op: test
+      chain:
+        next:
+          - test2
+      option:
+        name: task1
+    test2:
+      op: test
+      do_only: pre_success
+      chain:
+        part: link
+      option:
+        name: task2
+
+  stage2:
+    test3:
+      op: test3
+      chain:
+        next: test4
+      option:
+        name: task3
+    test4:
+      op: test2
+      chain:
+        part: link
+      option:
+        name: task4
